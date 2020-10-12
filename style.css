@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.item {
+    display: flex;
+    background-color: black;
+    height: 50px;
+    width: 50px;
+    color: white;
+    align-items: center;
+    justify-content: center;
+}
