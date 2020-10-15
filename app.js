@@ -3,8 +3,7 @@ var buttonText = document.createTextNode("Add Square.");
 button.appendChild(buttonText);
 document.body.appendChild(button);
 
-let x = document.getElementsByTagName("button");
-x[0].addEventListener("click", addSquare);
+document.getElementsByTagName("button")[0].addEventListener("click", addSquare);
 
 let ids = [];
 let squareNum = 0;
@@ -44,15 +43,30 @@ function doubleClick(e) {
     /*******************
      * could use % but I read bitwise is theoretically faster
      */
-    let squareBefore = document.getElementById(parseInt(e.target.id)-1);
-    let squareAfter = document.getElementById(parseInt(e.target.id) + 1);
+    let searchNum = 1;
+    id = parseInt(e.target.id);
+    let squareBefore = document.getElementById(id-searchNum);
+    let squareAfter = document.getElementById(id + searchNum);
     if(e.target.id&1) {
-        if(squareBefore === null) {
-            alert("No Square Found."); //This only really works once... once square 2 is gone it won't find square one to delete it
-        } else squareBefore.remove();
+        while(squareBefore === null) {
+            searchNum++;
+            squareBefore = document.getElementById(id-searchNum);
+            if(id-searchNum < 0) { 
+                alert("no square before this.")
+                break;
+            }
+        }
+        if(squareBefore !== null) squareBefore.remove();
+
     } else {
-        if(squareAfter === null) {
-            alert("No Square Found.");
-        } else squareAfter.remove(); // again this doesn't go further then one check.
+        while(squareAfter === null) {
+            searchNum++;
+            squareAfter = document.getElementById(id+searchNum);
+            if(id+searchNum > squareNum) { 
+                alert("no square before this.")
+                break;
+            }
+        }
+        if(squareAfter !== null) squareAfter.remove();
     }
 }
