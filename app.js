@@ -5,7 +5,6 @@ document.body.appendChild(button);
 
 document.getElementsByTagName("button")[0].addEventListener("click", addSquare);
 
-let ids = [];
 let squareNum = 0;
 let colors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
                 '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
@@ -53,7 +52,7 @@ function doubleClick(e) {
     id = parseInt(e.target.id); //id is a string
     let squareBefore = document.getElementById(id-searchNum);
     let squareAfter = document.getElementById(id + searchNum);
-    // & or %
+    // & or %, in other news aparently 0 is an even number
     if(e.target.id&1) { // odd
         while(squareBefore === null) {
             searchNum++;
