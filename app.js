@@ -40,14 +40,12 @@ function changeColor(e) {
     document.getElementById(e.target.id).style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 }
 function doubleClick(e) {
-    /*******************
-     * could use % but I read bitwise is theoretically faster
-     */
     let searchNum = 1;
-    id = parseInt(e.target.id);
+    id = parseInt(e.target.id); //id is a string
     let squareBefore = document.getElementById(id-searchNum);
     let squareAfter = document.getElementById(id + searchNum);
-    if(e.target.id&1) {
+    // & or %
+    if(e.target.id&1) { // odd
         while(squareBefore === null) {
             searchNum++;
             squareBefore = document.getElementById(id-searchNum);
@@ -58,7 +56,7 @@ function doubleClick(e) {
         }
         if(squareBefore !== null) squareBefore.remove();
 
-    } else {
+    } else { // even
         while(squareAfter === null) {
             searchNum++;
             squareAfter = document.getElementById(id+searchNum);
