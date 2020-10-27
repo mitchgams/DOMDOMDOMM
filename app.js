@@ -1,7 +1,7 @@
-var button = document.createElement("BUTTON");
-var buttonText = document.createTextNode("Add Square.");
+let button = document.createElement("BUTTON");
+let buttonText = document.createTextNode("Add Square.");
 button.appendChild(buttonText);
-document.body.appendChild(button);
+document.body.prepend(button);
 
 document.getElementsByTagName("button")[0].addEventListener("click", addSquare);
 
@@ -17,27 +17,21 @@ let sq = {
     '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
     '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
     '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'],
-    num: 0,
-    listener: function() {
-        for(const square of document.getElementsByClassName("item")) {
-            /* found a way to add parameters to functions within addEventListener by using .bind */
-            square.addEventListener("mouseover", idShown.bind(this, true));
-            square.addEventListener("mouseout", idShown.bind(this, false));
-            square.addEventListener("click", changeColor);
-            square.addEventListener("dblclick", doubleClick);
-        }
-    },
+    num: 0
 }
 
 
+let container = document.getElementsByClassName("container");
 function addSquare(e) {
-    let newDiv = document.createElement("DIV");
-    newDiv.classList.add("item");
-    newDiv.id = sq.num;
-    let container = document.getElementsByClassName("container");
-    container[0].appendChild(newDiv);
+    let square = document.createElement("DIV");
+    square.classList.add("item");
+    square.id = sq.num;
+    container[0].appendChild(square);
+    square.addEventListener("mouseover", idShown.bind(this, true));
+    square.addEventListener("mouseout", idShown.bind(this, false));
+    square.addEventListener("click", changeColor);
+    square.addEventListener("dblclick", doubleClick);
     sq.num++;
-    sq.listener();
 }
 
 function idShown(show, e) {
@@ -49,10 +43,21 @@ function changeColor(e) {
     document.getElementById(e.target.id).style.backgroundColor = sq.colors[Math.floor(Math.random() * sq.colors.length)];
 }
 function doubleClick(e) {
-    let searchNum = 1;
-    id = parseInt(e.target.id); //id is a string
-    let squareBefore = document.getElementById(id-searchNum);
-    let squareAfter = document.getElementById(id + searchNum);
+    //let searchNum = 1;
+    //id = parseInt(e.target.id); //id is a string
+    //let squareBefore = document.getElementById(id-searchNum);
+    //let squareAfter = document.getElementById(id + searchNum);
+	if (Number(this.id) % 2 === 0) {
+		this.nextSibling === null
+			? alert('no next square!')
+			: container[0].removeChild(this.nextSibling);
+	} else {
+        this.previousSibling === null
+        ? alert('no previous square!')
+        : container[0].removeChild(this.previousSibling);
+	}
+
+    /*
     // & or %, in other news aparently 0 is an even number
     if(e.target.id&1) { // odd
         while(squareBefore === null) {
@@ -75,5 +80,5 @@ function doubleClick(e) {
             }
         }
         if(squareAfter !== null) squareAfter.remove();
-    }
+    }*/
 }
