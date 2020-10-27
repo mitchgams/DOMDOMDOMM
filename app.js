@@ -31,21 +31,17 @@ function changeColor(e) {
     e.target.style.backgroundColor = sq.colors[Math.floor(Math.random() * sq.colors.length)];
 }
 function doubleClick(e) {
-    //let searchNum = 1;
-    //id = parseInt(e.target.id); //id is a string
-    //let squareBefore = document.getElementById(id-searchNum);
-    //let squareAfter = document.getElementById(id + searchNum);
 	if (Number(this.id) % 2 === 0) {
-		this.nextSibling === null
-			? alert('no next square!')
-			: container[0].removeChild(this.nextSibling);
+		this.nextSibling === null ? alert('no next square!') : container[0].removeChild(this.nextSibling);
 	} else {
-        this.previousSibling === null
-        ? alert('no previous square!')
-        : container[0].removeChild(this.previousSibling);
+        this.previousSibling === null ? alert('no previous square!') : container[0].removeChild(this.previousSibling);
 	}
 
     /*
+    let searchNum = 1;
+    id = parseInt(e.target.id); //id is a string
+    let squareBefore = document.getElementById(id-searchNum);
+    let squareAfter = document.getElementById(id + searchNum);
     // & or %, in other news aparently 0 is an even number
     if(e.target.id&1) { // odd
         while(squareBefore === null) {
