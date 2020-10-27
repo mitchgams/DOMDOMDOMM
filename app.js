@@ -3,7 +3,7 @@ let buttonText = document.createTextNode("Add Square.");
 button.appendChild(buttonText);
 document.body.prepend(button);
 
-document.getElementsByTagName("button")[0].addEventListener("click", addSquare);
+button.addEventListener("click", addSquare);
 
 
 let sq = {
